@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<html>
+<head>
+    <link href="{% static 'css/bootstrap.min.css' %}"
+          rel="stylesheet" media="screen">
+</head>
+<body>
+{% block baseclass %}
+    <div class="container" >
+
+        <div class="jumbotron">
+            <h1>Daily blog</h1>
+            <p>Post all your ideas and experinces.</p>
+            <p>It is the blog for the experience in your life which you think are different.</p>
+        </div>
+
+        {% if request.user.is_authenticated %}
+        {% else  %}
+        <form method="post" action="" class="col-xs-6 col-sm-3 pull-right">
+            <h2>{{ title }}</h2>
+
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <input type="submit" value="submit" class="btn btn-lg btn-primary btn-block">
+
+            <a href="/forget_password/" >
+            forget password
+            </a>
+
+    {% endif %}
+
+    </div>
+{% endblock %}
+
+</body>
+</html>
+
+
+
+
+

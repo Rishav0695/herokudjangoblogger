@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<html>
+<head>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{% static 'jss/jquery.min.js' %}"></script>
+    <script src="{% static 'jss/bootstrap.min.js' %}"></script>
+</head>
+
+
+<body>
+{% block baseclass %}
+    <div class="container ">
+        <div class="jumbotron">
+            <h1>Daily blog</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 ">
+            </div>
+            <div class="col-sm-8">
+                <h2>{{ title }}</h2>
+                {% for r in instance %}
+                    <div  style="border:2px ; box-shadow:0px 0px 6px 3px #E6E6E6;padding: 5px 15px 15px 15px">
+
+                        <h2>Title:{{ r.title }}</h2>
+                        <div>
+                            <div style="float: left;margin-top: -10px;padding-right: 10px">
+                                <img id="myImg" src="{{ r.author.userprofile.profileimage.url }}"style="border-radius: 50% ;width : 50px;height: 50px;
+                border-width: thick;border-color:black;" class="figure-img img-fluid rounded" alt="">
+                            </div>
+                            <h3>by {{ r.author }}</h3>
+                        </div>
+                        <hr>
+
+                        <span  class="glyphicon glyphicon-time">
+                            Created on: {{ r.timestamp }}
+                            Last update on: {{ r.updated }}
+                            <hr>
+                        </span>
+                        <div class="panel-body">
+                            <h4>subject:{{ r.subject }}</h4>
+                            <h4>Body:{{ r.body }}</h4>
+                        </div>
+                        <hr>
+                        <!--<div>
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+
+
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Modal Header</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Some text in the modal.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>-->
+
+                        {% for comments in comments %}
+
+                            {{ comments }}
+
+                        {% endfor %}
+                        <form method="get" action="/authencite_user_postcomment=only/{{ r.slug }}">
+
+                            <input type="submit" value="comment" class="btn btn-sm btn-primary">
+                        </form>
+                    </div>
+                    <br>
+                {% endfor %}
+                <div class="pagination">
+    <span class="step-links">
+        {% if instance.has_previous %}
+            <a href="?page={{ instance.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ instance.number }}of {{ instance.paginator.num_pages }}.
+        </span>
+
+        {% if instance.has_next %}
+            <a href="?page={{ instance.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+                </div>
+
+            </div>
+
+            <div class="col-sm-2">
+
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}
+
+</body>
+</html>
+
+
+
+
+

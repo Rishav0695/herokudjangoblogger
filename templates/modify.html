@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<html>
+<head>
+    <link href="{% static 'css/bootstrap.min.css' %}"
+          rel="stylesheet" media="screen">
+</head>
+
+
+<body>
+{% block baseclass %}
+    <div class="container ">
+        <div class="jumbotron">
+            <h1>Daily blog</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 ">
+
+            </div>
+            <div class="col-sm-8">
+
+                <form method="post" action="/authencite_user_updateparticularpost=only/{{ name }}/modified/" >
+                    {% csrf_token %}
+                    <hr>
+                    <div >
+
+                        title:{{ form.title}}
+
+                    </div>
+                    <hr>
+                    body:{{ form.body}}
+                    <hr>
+                    subject:{{ form.subject }}
+                    <input type="submit" value="modify" class="btn btn-sm btn-primary btn-default pull-right">
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <br>
+
+    </div>
+    <div class="col-sm-2">
+
+    </div>
+
+    </div>
+
+    </div>
+{% endblock %}
+
+</body>
+</html>
+
+
+
+
+
